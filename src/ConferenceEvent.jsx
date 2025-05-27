@@ -3,7 +3,6 @@ import "./ConferenceEvent.css";
 import TotalCost from "./TotalCost";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementQuantity, decrementQuantity } from "./venueSlice";
-import { decrementAvQuantity, incrementAvQuantity } from "./avSlice";
 import { incrementAvQuantity, decrementAvQuantity } from "./avSlice";
 import { toggleMealSelection } from "./mealsSlice";
 
@@ -41,7 +40,7 @@ const ConferenceEvent = () => {
     };
 
     const handleDecrementAvQuantity = (index) => {
-        dispatch(decrementAvQuantity);
+        dispatch(decrementAvQuantity(index));
     };
 
     const handleMealSelection = (index) => {
@@ -139,12 +138,8 @@ const ConferenceEvent = () => {
         return totalCost;
       };
 
-      const totalCosts = {
-        venue: venueTotalCost,
-        av: avTotalCost,
-        meals: mealsTotalCost,
-    };
     const venueTotalCost = calculateTotalCost("venue");
+
 
     const navigateToProducts = (idType) => {
         if (idType == '#venue' || idType == '#addons' || idType == '#meals') {
@@ -154,6 +149,12 @@ const ConferenceEvent = () => {
         }
       }
 
+      const totalCosts = {
+        venue: venueTotalCost,
+        av: avTotalCost,
+        meals: mealsTotalCost,
+    };
+    
     return (
         <>
             <navbar className="navbar_event_conference">
